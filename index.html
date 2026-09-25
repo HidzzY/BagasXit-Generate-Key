@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BAGASXIT · DIRECT KEY GENERATOR</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Firebase Legacy SDKs for Compatibility -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              purple: '#A855F7',
+              cyan: '#06B6D4',
+              dark: '#0F0B21',
+              card: 'rgba(26, 21, 59, 0.85)',
+              border: '#3B2D6B'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background: radial-gradient(circle at top left, #1A153B 0%, #0F0B21 50%, #05030A 100%);
+      min-height: 100vh;
+    }
+    
+    .glass-card {
+      background: rgba(26, 21, 59, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(168, 85, 247, 0.25);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(168, 85, 247, 0.15);
+    }
+
+    .glow-text {
+      text-shadow: 0 0 15px rgba(168, 85, 247, 0.6);
+    }
+
+    .glow-btn {
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(168, 85, 247, 0.4);
+    }
+
+    .glow-btn:hover {
+      box-shadow: 0 6px 28px rgba(168, 85, 247, 0.7);
+      transform: translateY(-2px);
+    }
+
+    /* Custom Scrollbar for Key History */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(15, 11, 33, 0.6);
+      border-radius: 8px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #3B2D6B;
+      border-radius: 8px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #A855F7;
+    }
+  </style>
+</head>
+
+<body class="text-slate-200 flex flex-col justify-between min-h-screen p-4 md:p-6 font-sans antialiased selection:bg-purple-500 selection:text-white">
+
+  <!-- Ambient Light Orbs -->
+  <div class="fixed top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-600/20 rounded-full blur-[120px] pointer-events-none"></div>
+  <div class="fixed bottom-10 right-10 w-72 h-72 bg-cyan-600/15 rounded-full blur-[100px] pointer-events-none"></div>
+
+  <!-- Main Container -->
+  <div class="max-w-md w-full mx-auto my-auto relative z-10 space-y-6">
+
+    <!-- Header / Logo -->
+    <div class="text-center space-y-2">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-400 text-xs font-semibold tracking-wider uppercase mb-1">
+        <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+        Direct Firebase Injector
+      </div>
+      <h1 class="text-4xl font-black tracking-wider bg-gradient-to-r from-purple-400 via-fuchsia-400 to-cyan-400 bg-clip-text text-transparent glow-text">
+        BAGASXIT
+      </h1>
+      <p class="text-slate-400 text-xs font-medium tracking-widest uppercase">VIP Key Generator Suite</p>
+    </div>
+
+    <!-- Main Card -->
+    <div class="glass-card rounded-3xl p-6 md:p-8 space-y-6 border border-brand-border/60">
+      
+      <!-- Key Status Box -->
+      <div class="bg-[#0F0B21]/90 rounded-2xl p-5 border border-purple-900/40 relative overflow-hidden text-center group">
+        <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
+        
+        <span class="text-[10px] font-bold tracking-widest uppercase text-slate-400 block mb-2">
+          Generated License Key
+        </span>
+        
+        <div id="keyDisplay" class="font-mono text-2xl md:text-3xl font-extrabold text-emerald-400 tracking-wider py-2 my-1 break-all select-all transition-all">
+          READY TO GENERATE 🔓
+        </div>
+        
+        <div id="timerContainer" class="hidden items-center justify-center gap-2 mt-2 text-xs text-slate-300 font-mono bg-purple-950/40 py-1.5 px-3 rounded-lg border border-purple-800/30">
+          <i class="fa-regular fa-clock text-purple-400"></i>
+          <span>Expires in: <strong id="countdownText" class="text-cyan-400">05:00:00</strong></span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="space-y-3">
+        <button id="generateBtn" onclick="generateDirectKey()" class="w-full glow-btn bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white font-bold py-4 px-6 rounded-xl text-sm tracking-wider uppercase transition flex items-center justify-center gap-2">
+          <i class="fa-solid fa-bolt text-yellow-300"></i>
+          <span>Generate Key Instant</span>
+        </button>
+
+        <button id="copyBtn" onclick="copyCurrentKey()" class="hidden w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold py-3.5 px-6 rounded-xl text-sm tracking-wider uppercase transition shadow-lg shadow-emerald-900/30 flex items-center justify-center gap-2">
+          <i class="fa-regular fa-copy"></i>
+          <span id="copyBtnText">Salin Key Ke Clipboard</span>
+        </button>
+      </div>
+
+      <!-- Status Indicator Alert -->
+      <div id="statusAlert" class="bg-purple-900/20 border border-purple-500/20 rounded-xl p-3 text-center text-xs text-slate-300 flex items-center justify-center gap-2">
+        <i id="statusIcon" class="fa-solid fa-circle-info text-purple-400"></i>
+        <span id="statusMessage">Klik tombol di atas untuk membuat key 5 jam.</span>
+      </div>
+
+      <!-- Key History Collapsible / Section -->
+      <div class="pt-2 border-t border-slate-800/80">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+            <i class="fa-solid fa-clock-rotate-left text-purple-400"></i> Riwayat Key
+          </span>
+          <button onclick="clearHistory()" class="text-[10px] text-slate-500 hover:text-red-400 transition">Hapus Log</button>
+        </div>
+        
+        <div id="historyList" class="space-y-2 max-h-36 overflow-y-auto pr-1">
+          <p class="text-center text-xs text-slate-600 py-3">Belum ada key yang dibuat.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer Links -->
+    <div class="text-center text-xs text-slate-500 space-x-3 pt-2">
+      <a href="https://t.me/BagasXIT" target="_blank" class="hover:text-purple-400 transition"><i class="fa-brands fa-telegram"></i> Telegram Channel</a>
+      <span>·</span>
+      <a href="https://whatsapp.com/channel/0029Vb6Eyam7oQhZLQKN9E3P" target="_blank" class="hover:text-emerald-400 transition"><i class="fa-brands fa-whatsapp"></i> WhatsApp Channel</a>
+    </div>
+
+  </div>
+
+  <!-- Notification Toast Container -->
+  <div id="toast" class="fixed bottom-5 right-5 transform translate-y-20 opacity-0 transition-all duration-300 ease-out bg-slate-900 border border-purple-500/50 text-white px-5 py-3 rounded-xl shadow-2xl flex items-center gap-3 z-50">
+    <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400"></i>
+    <span id="toastMessage" class="text-xs font-medium">Notifikasi</span>
+  </div>
+
+  <script>
+    // 1. Konfigurasi Firebase dari website asli BAGASXIT
+    const firebaseConfig = {
+      apiKey: "AIzaSyCn3vFJpy37tJfyu_P1xYZ5jCUcGVCtT3U",
+      authDomain: "bagasxit-official.firebaseapp.com",
+      databaseURL: "https://bagasxit-official-default-rtdb.firebaseio.com",
+      projectId: "bagasxit-official",
+      storageBucket: "bagasxit-official.firebasestorage.app",
+      messagingSenderId: "613462485191",
+      appId: "1:613462485191:web:f56ab40a53c3441604f6e2"
+    };
+
+    // Initialize Firebase
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+    const db = firebase.database();
+    const auth = firebase.auth();
+
+    // DOM Elements
+    const keyDisplay = document.getElementById('keyDisplay');
+    const timerContainer = document.getElementById('timerContainer');
+    const countdownText = document.getElementById('countdownText');
+    const generateBtn = document.getElementById('generateBtn');
+    const copyBtn = document.getElementById('copyBtn');
+    const copyBtnText = document.getElementById('copyBtnText');
+    const statusAlert = document.getElementById('statusAlert');
+    const statusMessage = document.getElementById('statusMessage');
+    const statusIcon = document.getElementById('statusIcon');
+    const historyList = document.getElementById('historyList');
+
+    let currentActiveKey = "";
+    let timerInterval = null;
+
+    window.addEventListener('DOMContentLoaded', () => {
+      // Inisialisasi Auth Anonymous
+      auth.signInAnonymously().catch(err => {
+        console.error("Auth error:", err);
+        updateStatus("⚠️ Gagal otentikasi Firebase secara anonim.", "error");
+      });
+
+      // Load riwayat lokal
+      renderHistory();
+      
+      // Cek apakah ada key lokal yang masih aktif
+      checkLocalActiveKey();
+    });
+
+    async function generateDirectKey() {
+      setLoading(true);
+      updateStatus("Menghubungkan ke Firebase Database...", "info");
+
+      try {
+        // Pastikan terotentikasi anonim
+        if (!auth.currentUser) {
+          await auth.signInAnonymously();
+        }
+
+        // Generate format Key: BX-XXXXXX
+        const randomCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+        const newKey = "BX-" + randomCode;
+        const now = Date.now();
+        const DURATION_HOURS = 5;
+        const durationMs = DURATION_HOURS * 3600 * 1000;
+        const expiresAt = now + durationMs;
+
+        // Payload persis sesuai struktur database asli
+        const payload = {
+          key: newKey,
+          created_at: now,
+          expires_at: expiresAt,
+          duration_ms: durationMs,
+          is_active: true,
+          hwid: "",
+          assigned_to: "Direct-Generator-Web",
+          source: "direct_injector",
+          reset_count: 0,
+          last_reset: 0
+        };
+
+        // Kirim langsung ke node Firebase Realtime Database: /keys/{newKey}
+        await db.ref('keys/' + newKey).set(payload);
+
+        // Berhasil disimpan
+        currentActiveKey = newKey;
+        
+        // Simpan ke history lokal
+        saveKeyToHistory(newKey, expiresAt);
+        
+        // Update Tampilan UI
+        keyDisplay.textContent = newKey;
+        keyDisplay.classList.remove('text-slate-400');
+        keyDisplay.classList.add('text-emerald-400');
+        
+        copyBtn.classList.remove('hidden');
+        timerContainer.classList.remove('hidden');
+        timerContainer.classList.add('flex');
+        
+        startTimer(expiresAt);
+        renderHistory();
+
+        updateStatus("✅ Key berhasil diinjeksi ke Firebase! Langsung siap pakai.", "success");
+        showToast("Key Baru Berhasil Dibuat!", "success");
+
+      } catch (error) {
+        console.error("Firebase write error:", error);
+        updateStatus("❌ Gagal membuat Key: " + error.message, "error");
+        showToast("Gagal terhubung ke Database!", "error");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    function copyCurrentKey() {
+      if (!currentActiveKey) return;
+
+      // Copy mechanism using execCommand/Clipboard
+      const el = document.createElement('textarea');
+      el.value = currentActiveKey;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+
+      copyBtnText.textContent = "BERHASIL DISALIN! ✨";
+      showToast("Key telah disalin ke clipboard", "success");
+
+      setTimeout(() => {
+        copyBtnText.textContent = "Salin Key Ke Clipboard";
+      }, 2000);
+    }
+
+    function startTimer(expiresAt) {
+      if (timerInterval) clearInterval(timerInterval);
+
+      function updateTimer() {
+        const remaining = expiresAt - Date.now();
+        if (remaining <= 0) {
+          clearInterval(timerInterval);
+          countdownText.textContent = "EXPIRED";
+          keyDisplay.classList.remove('text-emerald-400');
+          keyDisplay.classList.add('text-rose-500');
+          updateStatus("Key ini telah kadaluarsa.", "error");
+          return;
+        }
+
+        const hours = Math.floor(remaining / (1000 * 60 * 60));
+        const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
+
+        countdownText.textContent = 
+          `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      }
+
+      updateTimer();
+      timerInterval = setInterval(updateTimer, 1000);
+    }
+
+    function checkLocalActiveKey() {
+      const history = getHistory();
+      if (history.length > 0) {
+        const latest = history[0];
+        if (latest.expiresAt > Date.now()) {
+          currentActiveKey = latest.key;
+          keyDisplay.textContent = latest.key;
+          copyBtn.classList.remove('hidden');
+          timerContainer.classList.remove('hidden');
+          timerContainer.classList.add('flex');
+          startTimer(latest.expiresAt);
+          updateStatus("Menampilkan key aktif terakhir Anda.", "info");
+        }
+      }
+    }
+
+    // Storage Management
+    function getHistory() {
+      return JSON.parse(localStorage.getItem('bagasxit_direct_keys') || '[]');
+    }
+
+    function saveKeyToHistory(key, expiresAt) {
+      const history = getHistory();
+      history.unshift({ key, expiresAt, createdAt: Date.now() });
+      // Simpan maksimal 15 key terakhir
+      localStorage.setItem('bagasxit_direct_keys', JSON.stringify(history.slice(0, 15)));
+    }
+
+    function clearHistory() {
+      localStorage.removeItem('bagasxit_direct_keys');
+      renderHistory();
+      showToast("Riwayat key dibersihkan", "info");
+    }
+
+    function renderHistory() {
+      const history = getHistory();
+      if (history.length === 0) {
+        historyList.innerHTML = '<p class="text-center text-xs text-slate-600 py-3">Belum ada riwayat key.</p>';
+        return;
+      }
+
+      historyList.innerHTML = history.map(item => {
+        const isExpired = item.expiresAt <= Date.now();
+        return `
+          <div class="flex items-center justify-between p-2 rounded-lg bg-slate-900/50 border border-purple-900/20 text-xs">
+            <div class="font-mono ${isExpired ? 'text-slate-500 line-through' : 'text-purple-300'}">
+              ${item.key}
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] ${isExpired ? 'text-red-400' : 'text-emerald-400'}">
+                ${isExpired ? 'Expired' : 'Aktif'}
+              </span>
+              <button onclick="copySpecificKey('${item.key}')" class="text-slate-400 hover:text-white p-1">
+                <i class="fa-regular fa-copy"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function copySpecificKey(key) {
+      const el = document.createElement('textarea');
+      el.value = key;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+      showToast(`Key ${key} disalin!`, "success");
+    }
+
+    function updateStatus(msg, type = "info") {
+      statusMessage.textContent = msg;
+      statusAlert.className = "rounded-xl p-3 text-center text-xs flex items-center justify-center gap-2 border transition-all ";
+      
+      if (type === "success") {
+        statusAlert.classList.add("bg-emerald-950/30", "border-emerald-500/30", "text-emerald-300");
+        statusIcon.className = "fa-solid fa-circle-check text-emerald-400";
+      } else if (type === "error") {
+        statusAlert.classList.add("bg-rose-950/30", "border-rose-500/30", "text-rose-300");
+        statusIcon.className = "fa-solid fa-circle-xmark text-rose-400";
+      } else {
+        statusAlert.classList.add("bg-purple-900/20", "border-purple-500/20", "text-slate-300");
+        statusIcon.className = "fa-solid fa-circle-info text-purple-400";
+      }
+    }
+
+    function setLoading(isLoading) {
+      if (isLoading) {
+        generateBtn.disabled = true;
+        generateBtn.classList.add('opacity-70', 'cursor-not-allowed');
+        generateBtn.querySelector('span').textContent = 'Generating Key...';
+      } else {
+        generateBtn.disabled = false;
+        generateBtn.classList.remove('opacity-70', 'cursor-not-allowed');
+        generateBtn.querySelector('span').textContent = 'Generate Key Instant';
+      }
+    }
+
+    function showToast(message, type = "success") {
+      const toast = document.getElementById('toast');
+      const toastMessage = document.getElementById('toastMessage');
+      const toastIcon = document.getElementById('toastIcon');
+
+      toastMessage.textContent = message;
+      if (type === "success") {
+        toastIcon.className = "fa-solid fa-circle-check text-emerald-400";
+      } else if (type === "error") {
+        toastIcon.className = "fa-solid fa-circle-xmark text-rose-400";
+      } else {
+        toastIcon.className = "fa-solid fa-circle-info text-cyan-400";
+      }
+
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
