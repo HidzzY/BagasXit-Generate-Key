@@ -43,7 +43,7 @@ body{
 @keyframes aur2{0%{transform:translate(0,0) scale(1)}100%{transform:translate(-60px,-50px) scale(1.12)}}
 .main{flex:1;position:relative;z-index:2;padding:20px 16px 30px;display:flex;align-items:center;justify-content:center}
 .container{
-  max-width:440px;width:100%;
+  max-width:460px;width:100%;
   background:rgba(14,14,18,.75);border-radius:24px;
   padding:24px 22px 22px;border:1px solid var(--border2);
   text-align:center;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
@@ -51,10 +51,7 @@ body{
   animation:riseIn .6s cubic-bezier(.16,1,.3,1);
 }
 @keyframes riseIn{from{opacity:0;transform:translateY(20px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
-.head-row{
-  display:flex;align-items:center;gap:12px;
-  margin-bottom:20px;text-align:left;
-}
+.head-row{display:flex;align-items:center;gap:12px;margin-bottom:20px;text-align:left;}
 .back-btn{
   display:inline-flex;align-items:center;gap:5px;
   padding:7px 11px;border-radius:10px;
@@ -81,10 +78,7 @@ body{
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
   background-clip:text;
 }
-.subtitle{
-  color:var(--txt-mute);font-size:9px;letter-spacing:3px;
-  font-weight:700;margin-left:40px;
-}
+.subtitle{color:var(--txt-mute);font-size:9px;letter-spacing:3px;font-weight:700;margin-left:40px;}
 .status{
   display:inline-flex;align-items:center;gap:6px;
   padding:5px 12px;border-radius:20px;
@@ -96,14 +90,10 @@ body{
 .status .dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:blink 1.6s infinite}
 .status.off .dot{background:var(--red);box-shadow:0 0 8px var(--red)}
 @keyframes blink{50%{opacity:.4}}
-.steps{display:flex;justify-content:center;gap:6px;margin-bottom:20px}
-.step-dot{width:26px;height:3px;border-radius:3px;background:var(--border2);transition:.4s}
-.step-dot.on{background:linear-gradient(90deg,var(--accent),var(--cyan));box-shadow:0 0 10px var(--accent-glow)}
-.step-dot.done{background:var(--green)}
 .key-box{
   background:linear-gradient(180deg,rgba(10,10,13,.9),rgba(14,14,18,.9));
-  border-radius:16px;padding:24px 16px;border:1px solid var(--border2);
-  margin-bottom:16px;position:relative;overflow:hidden;transition:.5s;
+  border-radius:16px;padding:22px 16px;border:1px solid var(--border2);
+  margin-bottom:14px;position:relative;overflow:hidden;transition:.5s;
 }
 .key-box::before{
   content:'';position:absolute;top:0;left:0;right:0;height:2px;
@@ -115,7 +105,7 @@ body{
 .shine{position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.1) 50%,transparent 70%);pointer-events:none}
 .key-label{color:var(--txt-mute);font-size:9px;letter-spacing:3px;font-weight:800;margin-bottom:10px}
 .term{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--green);text-align:left;padding:0 8px;min-height:0;overflow:hidden;transition:.3s}
-.term.show{min-height:100px;margin-bottom:12px}
+.term.show{min-height:88px;margin-bottom:10px}
 .term .line{display:block;margin-bottom:4px;opacity:0;transform:translateX(-6px);animation:termLine .35s forwards}
 .term .line.warn{color:var(--yellow)}
 .term .line.ok{color:var(--green)}
@@ -160,9 +150,55 @@ body{
   color:#fff;display:none;margin-top:8px;
   box-shadow:0 8px 24px rgba(16,185,129,.35);
 }
+.btn-new{
+  background:linear-gradient(135deg,var(--cyan),#0891B2);
+  color:#fff;display:none;margin-top:8px;
+  box-shadow:0 8px 24px rgba(6,182,212,.35);
+}
 .info-txt{color:var(--txt-dim);font-size:12px;margin-top:14px;line-height:1.5;min-height:34px;font-weight:500}
+
+/* RIWAYAT */
+.riwayat{
+  margin-top:16px;padding:14px;background:var(--card);
+  border:1px solid var(--border);border-radius:12px;text-align:left;
+}
+.riwayat-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.riwayat-head h4{color:var(--accent);font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+.riwayat-head .jumlah{color:var(--txt-mute);font-size:10px;font-weight:700}
+.riwayat-list{max-height:220px;overflow-y:auto}
+.riwayat-list::-webkit-scrollbar{width:6px}
+.riwayat-list::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+.riwayat-item{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:8px 10px;background:var(--bg2);border:1px solid var(--border);
+  border-radius:8px;margin-bottom:6px;transition:.2s;gap:8px;
+}
+.riwayat-item:last-child{margin-bottom:0}
+.riwayat-item:hover{border-color:var(--accent)}
+.riwayat-item.aktif{border-color:var(--green);background:rgba(16,185,129,.08)}
+.riwayat-item.expired{opacity:.55}
+.riwayat-item .kiri{flex:1;min-width:0}
+.riwayat-item .key-txt{
+  font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:800;
+  color:var(--txt);letter-spacing:.5px;word-break:break-all;margin-bottom:2px;
+}
+.riwayat-item .meta{font-size:9px;color:var(--txt-mute);font-weight:600;letter-spacing:.3px}
+.riwayat-item.aktif .meta{color:var(--green)}
+.riwayat-item.expired .meta{color:var(--red)}
+.riwayat-item .aksi{
+  display:flex;flex-direction:column;gap:4px;flex-shrink:0;
+}
+.riwayat-item .aksi button{
+  background:var(--card2);border:1px solid var(--border2);color:var(--txt-dim);
+  padding:4px 8px;border-radius:6px;font-size:9px;font-weight:800;cursor:pointer;
+  letter-spacing:.4px;transition:.2s;
+}
+.riwayat-item .aksi button:hover{color:var(--accent);border-color:var(--accent)}
+.riwayat-item .aksi button.hapus:hover{color:var(--red);border-color:var(--red)}
+.kosong{color:var(--txt-mute);font-size:11px;text-align:center;padding:14px;font-weight:600}
+
 .guide{
-  margin-top:20px;padding:16px;background:var(--card);
+  margin-top:16px;padding:16px;background:var(--card);
   border:1px solid var(--border);border-radius:12px;text-align:left;
 }
 .guide h4{color:var(--accent);font-size:11px;font-weight:800;letter-spacing:1px;margin-bottom:10px;text-transform:uppercase}
@@ -227,11 +263,6 @@ body{
       <span id="statusText">SYSTEM ONLINE</span>
     </div>
 
-    <div class="steps">
-      <div class="step-dot on" id="step1"></div>
-      <div class="step-dot" id="step2"></div>
-    </div>
-
     <div class="key-box" id="keyBox">
       <div class="shine" id="shine"></div>
       <div class="key-label">YOUR LICENSE KEY</div>
@@ -247,20 +278,31 @@ body{
           <span class="lbl">REMAINING</span>
         </div>
       </div>
-      <div class="key-timer" id="keyTimer">Click GENERATE to get your key</div>
+      <div class="key-timer" id="keyTimer">No active key</div>
     </div>
 
     <button class="btn btn-primary" id="btnGet">🔑 GENERATE KEY</button>
     <button class="btn btn-copy" id="btnCopy">📋 COPY KEY</button>
+    <button class="btn btn-new" id="btnNew">➕ GENERATE NEW KEY</button>
 
-    <div class="info-txt" id="infoTxt">Click GENERATE KEY to receive your license instantly.</div>
+    <div class="info-txt" id="infoTxt">Click GENERATE KEY. You can generate as many as you want.</div>
+
+    <div class="riwayat">
+      <div class="riwayat-head">
+        <h4>Key History</h4>
+        <span class="jumlah" id="jmlRiwayat">0</span>
+      </div>
+      <div class="riwayat-list" id="riwayatList">
+        <div class="kosong">No keys yet</div>
+      </div>
+    </div>
 
     <div class="guide">
       <h4>How to Use</h4>
-      <div class="step"><div class="n">1</div><div class="t">Copy the key above</div></div>
+      <div class="step"><div class="n">1</div><div class="t">Copy the active key</div></div>
       <div class="step"><div class="n">2</div><div class="t">Open the BAGASXIT app</div></div>
       <div class="step"><div class="n">3</div><div class="t">Paste into the license field</div></div>
-      <div class="step"><div class="n">4</div><div class="t">Enjoy all the mods</div></div>
+      <div class="step"><div class="n">4</div><div class="t">Generate new anytime</div></div>
     </div>
 
   </div>
@@ -319,6 +361,12 @@ body{
 var SB_URL = 'https://qlzwqbbvjscfjaicbhks.supabase.co';
 var SB_KEY = 'sb_publishable_DRIOqI7O90TinECl4K6FJA_l0nIaPCY';
 
+var MASA_AKTIF_MS = 5 * 3600 * 1000;   // 5 jam
+var USER_K = 'bagasxit_user_key';
+var HISTORY_K = 'bagasxit_key_history';
+var MAX_HISTORY = 50;
+var AUTO_RENEW_MARGIN_MS = 5 * 60 * 1000; // auto-renew kalau sisa < 5 menit
+
 function headerDasar(tambahan){
   var h = { 'apikey': SB_KEY };
   if (tambahan) for (var k in tambahan) h[k] = tambahan[k];
@@ -361,17 +409,14 @@ async function sbInsert(table, data){
 }
 // ================================
 
-var USER_K = 'bagasxit_user_key';
-
 var $keyBox = document.getElementById('keyBox');
 var $keyVal = document.getElementById('keyValue');
 var $keyTimer = document.getElementById('keyTimer');
 var $btnGet = document.getElementById('btnGet');
 var $btnCopy = document.getElementById('btnCopy');
+var $btnNew = document.getElementById('btnNew');
 var $infoTxt = document.getElementById('infoTxt');
 var $toast = document.getElementById('toast');
-var $step1 = document.getElementById('step1');
-var $step2 = document.getElementById('step2');
 var $timer = document.getElementById('timer');
 var $timerFg = document.getElementById('timerFg');
 var $timerTxt = document.getElementById('timerTxt');
@@ -379,10 +424,126 @@ var $shine = document.getElementById('shine');
 var $term = document.getElementById('term');
 var $status = document.getElementById('statusBadge');
 var $statusTxt = document.getElementById('statusText');
+var $riwayatList = document.getElementById('riwayatList');
+var $jmlRiwayat = document.getElementById('jmlRiwayat');
 
-var curKey = '', cdInt = null, sedangProses = false;
+var curKey = '', curExpiry = 0, cdInt = null, sedangProses = false;
 var RING = 251.2;
 
+/* ===== RIWAYAT ===== */
+function bacaRiwayat(){
+  try {
+    var arr = JSON.parse(localStorage.getItem(HISTORY_K) || '[]');
+    if (!Array.isArray(arr)) return [];
+    return arr;
+  } catch(e){ return []; }
+}
+
+function simpanRiwayat(arr){
+  if (arr.length > MAX_HISTORY) arr = arr.slice(0, MAX_HISTORY);
+  localStorage.setItem(HISTORY_K, JSON.stringify(arr));
+}
+
+function tambahRiwayat(key, expiresAt){
+  var arr = bacaRiwayat();
+  // hindari duplikat key
+  arr = arr.filter(function(it){ return it.key !== key; });
+  arr.unshift({ key: key, expires_at: expiresAt, dibuat: Date.now() });
+  simpanRiwayat(arr);
+}
+
+function hapusRiwayat(key){
+  var arr = bacaRiwayat().filter(function(it){ return it.key !== key; });
+  simpanRiwayat(arr);
+  renderRiwayat();
+}
+
+function formatSisa(expiresAt){
+  var ms = expiresAt - Date.now();
+  if (ms <= 0) return 'expired';
+  var h = Math.floor(ms / 3600000);
+  var m = Math.floor((ms % 3600000) / 60000);
+  var s = Math.floor((ms % 60000) / 1000);
+  if (h > 0) return h + 'h ' + (m < 10 ? '0' + m : m) + 'm';
+  if (m > 0) return m + 'm ' + (s < 10 ? '0' + s : s) + 's';
+  return s + 's';
+}
+
+function renderRiwayat(){
+  var arr = bacaRiwayat();
+  $jmlRiwayat.textContent = arr.length;
+  if (arr.length === 0){
+    $riwayatList.innerHTML = '<div class="kosong">No keys yet</div>';
+    return;
+  }
+  var html = '';
+  for (var i = 0; i < arr.length; i++){
+    var it = arr[i];
+    var exp = it.expires_at;
+    var isAktif = exp > Date.now() && it.key === curKey;
+    var isExp = exp <= Date.now();
+    var cls = 'riwayat-item' + (isAktif ? ' aktif' : '') + (isExp ? ' expired' : '');
+    var label = isAktif ? '● AKTIF — ' + formatSisa(exp) : (isExp ? '✕ EXPIRED' : '○ idle — ' + formatSisa(exp));
+    html += '<div class="' + cls + '">';
+    html += '<div class="kiri">';
+    html += '<div class="key-txt">' + it.key + '</div>';
+    html += '<div class="meta">' + label + '</div>';
+    html += '</div>';
+    html += '<div class="aksi">';
+    html += '<button data-act="pakai" data-key="' + it.key + '">PAKAI</button>';
+    html += '<button class="hapus" data-act="hapus" data-key="' + it.key + '">HAPUS</button>';
+    html += '</div>';
+    html += '</div>';
+  }
+  $riwayatList.innerHTML = html;
+
+  // pasang event listener
+  var btns = $riwayatList.querySelectorAll('button');
+  for (var j = 0; j < btns.length; j++){
+    (function(btn){
+      btn.onclick = function(){
+        var act = btn.getAttribute('data-act');
+        var key = btn.getAttribute('data-key');
+        if (act === 'hapus'){
+          hapusRiwayat(key);
+          if (key === curKey){
+            // key aktif dihapus dari riwayat, tetap pakai sampai expired
+          }
+          return;
+        }
+        if (act === 'pakai'){
+          pakaiDariRiwayat(key);
+        }
+      };
+    })(btns[j]);
+  }
+}
+
+async function pakaiDariRiwayat(key){
+  // verifikasi key ke database, kalau valid & belum expired → jadikan aktif
+  try {
+    var rows = await sbGet('keys?key=eq.' + encodeURIComponent(key) + '&select=*');
+    if (rows && rows.length > 0){
+      var d = rows[0];
+      var exp = new Date(d.expires_at).getTime();
+      if (exp > Date.now() && d.is_active){
+        curKey = key;
+        curExpiry = exp;
+        localStorage.setItem(USER_K, key);
+        showKey(key, exp, false);
+        return;
+      }
+    }
+    $infoTxt.textContent = '⚠️ Key sudah expired / tidak aktif.';
+    toast('⚠️ Key tidak aktif', true);
+    // hapus dari riwayat
+    hapusRiwayat(key);
+  } catch(e){
+    $infoTxt.textContent = '❌ ' + e.message;
+  }
+}
+
+/* ===== UI ===== */
 function toast(msg, isErr){
   $toast.textContent = msg;
   $toast.className = isErr ? 'err show' : 'show';
@@ -400,6 +561,7 @@ function doGen(){
   if (sedangProses) return;
   sedangProses = true;
   $btnGet.disabled = true;
+  $btnNew.disabled = true;
   $btnGet.textContent = '⏳ GENERATING...';
   $infoTxt.textContent = '⚙️ Generating your key...';
   $term.classList.add('show');
@@ -423,16 +585,16 @@ function doGen(){
       clearInterval(termInt);
       setTimeout(makeKey, 300);
     }
-  }, 200);
+  }, 180);
 }
 
 function makeKey(){
   var newKey = 'BX-' + acakKode();
   var now = Date.now();
-  var durMs = 5 * 3600 * 1000;
+  var expMs = now + MASA_AKTIF_MS;
   var payload = {
     key: newKey,
-    expires_at: new Date(now + durMs).toISOString(),
+    expires_at: new Date(expMs).toISOString(),
     is_active: true,
     hwid: null
   };
@@ -441,24 +603,21 @@ function makeKey(){
     if (!res || (Array.isArray(res) && res.length === 0)){
       throw new Error('Empty response');
     }
-    finalize(newKey, now + durMs);
+    finalize(newKey, expMs);
   }).catch(function(e){
     if (e && e.status === 409){
-      // bentrok PK, coba sekali lagi dengan kode baru
       var retryKey = 'BX-' + acakKode();
       sbInsert('keys', {
         key: retryKey,
-        expires_at: new Date(now + durMs).toISOString(),
+        expires_at: new Date(expMs).toISOString(),
         is_active: true,
         hwid: null
       }).then(function(res){
         if (!res || (Array.isArray(res) && res.length === 0)){
           throw new Error('Empty response');
         }
-        finalize(retryKey, now + durMs);
-      }).catch(function(e2){
-        gagal(e2);
-      });
+        finalize(retryKey, expMs);
+      }).catch(gagal);
       return;
     }
     gagal(e);
@@ -468,15 +627,20 @@ function makeKey(){
 function finalize(key, expiresAt){
   sedangProses = false;
   $btnGet.disabled = false;
+  $btnNew.disabled = false;
   $btnGet.textContent = '🔑 GENERATE KEY';
-  localStorage.setItem(USER_K, key);
   curKey = key;
-  showKey(key, expiresAt);
+  curExpiry = expiresAt;
+  localStorage.setItem(USER_K, key);
+  tambahRiwayat(key, expiresAt);
+  showKey(key, expiresAt, true);
+  renderRiwayat();
 }
 
 function gagal(e){
   sedangProses = false;
   $btnGet.disabled = false;
+  $btnNew.disabled = false;
   $btnGet.textContent = '🔑 GENERATE KEY';
   $term.innerHTML = '<span class="line warn">> generation failed</span>';
   $infoTxt.textContent = '❌ ' + (e.message || 'Generate gagal');
@@ -499,23 +663,24 @@ function typeKey(full, cb){
       clearInterval(int);
       setTimeout(function(){ cs.remove(); if (cb) cb(); }, 400);
     }
-  }, 70);
+  }, 60);
 }
 
-function showKey(key, expiresAt){
+function showKey(key, expiresAt, autoCopy){
   $infoTxt.textContent = '✅ Key active. Copy & paste into the BAGASXIT app.';
   $btnGet.style.display = 'none';
   $btnCopy.style.display = 'block';
+  $btnNew.style.display = 'block';
   $keyBox.classList.add('active');
-  $step1.className = 'step-dot done';
-  $step2.className = 'step-dot done';
   $term.classList.add('show');
   $term.innerHTML = '<span class="line ok">> key generated ✓</span>';
 
   typeKey(key, function(){
-    navigator.clipboard.writeText(key).then(function(){
-      toast('✅ Key copied automatically');
-    }).catch(function(){});
+    if (autoCopy){
+      navigator.clipboard.writeText(key).then(function(){
+        toast('✅ Key copied automatically');
+      }).catch(function(){});
+    }
     setTimeout(function(){
       $keyBox.scrollIntoView({ behavior:'smooth', block:'center' });
     }, 200);
@@ -536,18 +701,40 @@ function showKey(key, expiresAt){
       $timerTxt.textContent = 'EXPIRED';
       $timerFg.style.strokeDashoffset = RING;
       clearInterval(cdInt);
+      autoRenew();
       return;
     }
     var h = Math.floor(ms / 3600000);
     var m = Math.floor((ms % 3600000) / 60000);
     $timerTxt.textContent = (h > 0 ? h + 'h ' : '') + (m < 10 ? '0' + m : m) + 'm';
     $timerFg.style.strokeDashoffset = RING * (1 - ms / total);
+
+    // auto-renew kalau sisa < margin
+    if (ms < AUTO_RENEW_MARGIN_MS && !sedangProses){
+      autoRenew();
+    }
   }
   tick();
   cdInt = setInterval(tick, 1000);
 }
 
+function autoRenew(){
+  if (sedangProses) return;
+  $infoTxt.textContent = '🔄 Auto-renew: generating new key...';
+  $term.innerHTML = '<span class="line warn">> key expired — auto-renewing...</span>';
+  $btnGet.style.display = 'block';
+  $btnCopy.style.display = 'none';
+  $btnNew.style.display = 'none';
+  $keyBox.classList.remove('active');
+  $timer.classList.remove('show');
+  $keyTimer.textContent = 'Renewing...';
+  setTimeout(doGen, 500);
+}
+
+/* ===== TOMBOL ===== */
 $btnGet.onclick = function(){ doGen(); };
+
+$btnNew.onclick = function(){ doGen(); };
 
 $btnCopy.onclick = function(){
   navigator.clipboard.writeText(curKey).then(function(){
@@ -557,25 +744,34 @@ $btnCopy.onclick = function(){
   });
 };
 
-// Cek key lama di localStorage saat halaman dibuka
-(function init(){
+/* ===== INIT ===== */
+(async function init(){
+  renderRiwayat();
+
   var k = localStorage.getItem(USER_K);
   if (!k) return;
-  sbGet('keys?key=eq.' + encodeURIComponent(k) + '&select=*').then(function(rows){
+
+  try {
+    var rows = await sbGet('keys?key=eq.' + encodeURIComponent(k) + '&select=*');
     if (rows && rows.length > 0){
       var d = rows[0];
-      var expMs = new Date(d.expires_at).getTime();
-      if (expMs > Date.now() && d.is_active){
+      var exp = new Date(d.expires_at).getTime();
+      if (exp > Date.now() && d.is_active){
         curKey = k;
-        showKey(k, expMs);
+        curExpiry = exp;
+        showKey(k, exp, false);
+        renderRiwayat();
         return;
       }
     }
     localStorage.removeItem(USER_K);
-  }).catch(function(){ localStorage.removeItem(USER_K); });
+    renderRiwayat();
+  } catch(e){
+    // diam kalau gagal
+  }
 })();
 
-// Pantau status maintenance dari tabel config
+/* ===== CEK MAINTENANCE ===== */
 setInterval(function(){
   sbGet('config?id=eq.maintenance&select=value').then(function(rows){
     var on = rows && rows.length > 0 && rows[0].value === true;
@@ -588,6 +784,9 @@ setInterval(function(){
     }
   }).catch(function(){});
 }, 30000);
+
+/* Refresh tampilan riwayat tiap 5 detik supaya countdown tetap update */
+setInterval(renderRiwayat, 5000);
 </script>
 </body>
 </html>
